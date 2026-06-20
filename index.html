@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最近7天AI动态新闻</title>
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #0a0a0a;
+    --grey-1: #f0f0ee;
+    --grey-2: #d4d4d2;
+    --grey-3: #737373;
+    --accent: #002FA7;
+    --accent-on: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    overflow-x: hidden;
+  }
+  .poster {
+    width: min(1600px, 100%);
+    min-height: 2200px;
+    margin: 0 auto;
+    padding: clamp(34px, 5.4vw, 86px) clamp(28px, 5.5vw, 88px) clamp(36px, 4.9vw, 78px);
+    background: var(--paper);
+  }
+  .eyebrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--grey-3);
+  }
+  h1 {
+    margin: clamp(36px, 3.9vw, 62px) 0 clamp(18px, 1.8vw, 28px);
+    max-width: 1320px;
+    font-size: clamp(58px, 7.75vw, 124px);
+    font-weight: 250;
+    line-height: .92;
+    letter-spacing: 0;
+  }
+  .lede {
+    margin: 0 0 clamp(34px, 3.6vw, 58px);
+    max-width: 1150px;
+    font-size: clamp(22px, 2.125vw, 34px);
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--grey-3);
+  }
+  .hero-illustration {
+    margin: 0 0 clamp(34px, 3.4vw, 54px);
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--grey-2);
+    padding: 22px 0 18px;
+  }
+  .hero-illustration svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .label-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .label-icon {
+    width: 68px;
+    height: 68px;
+    color: var(--accent);
+  }
+  .label-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .label-kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    display: inline-block;
+    background: var(--accent);
+    color: var(--accent-on);
+    padding: 8px 12px;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .section-title {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin: clamp(48px, 4.75vw, 76px) 0 26px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+  }
+  .section-title h2 {
+    margin: 0;
+    font-size: clamp(42px, 4vw, 64px);
+    font-weight: 250;
+    line-height: .96;
+  }
+  .section-title span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--grey-3);
+    text-transform: uppercase;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .category-row {
+    display: grid;
+    grid-template-columns: minmax(190px, 230px) 1fr;
+    gap: 26px;
+    align-items: stretch;
+  }
+  .category-label {
+    border-top: 8px solid var(--accent);
+    border-bottom: 1px solid var(--grey-2);
+    padding: 20px 0;
+  }
+  .category-label .label-title {
+    margin-top: 22px;
+    font-size: clamp(30px, 2.375vw, 38px);
+    font-weight: 300;
+    line-height: 1.05;
+  }
+  .category-label .label-count {
+    margin-top: 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--grey-3);
+  }
+  .category-events {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .item {
+    min-height: 380px;
+    padding: 22px 22px 20px;
+    border-top: 8px solid var(--accent);
+    background: var(--paper);
+    outline: 1px solid var(--grey-2);
+    display: flex;
+    flex-direction: column;
+  }
+  .card-top {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .tag {
+    display: inline-block;
+    color: var(--accent-on);
+    background: var(--accent);
+    padding: 7px 11px 8px;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+  .item-no {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--grey-2);
+  }
+  .item h3 {
+    margin: 0 0 17px;
+    font-size: clamp(23px, 1.875vw, 30px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+  .item p {
+    margin: 0;
+    font-size: clamp(17px, 1.3125vw, 21px);
+    line-height: 1.42;
+    color: var(--grey-3);
+  }
+  .item .summary {
+    min-height: 138px;
+    margin-bottom: 18px;
+    color: #202020;
+  }
+  .item .source {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--grey-2);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--grey-3);
+  }
+  .item .link {
+    margin-top: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  a:hover {
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+  .takeaway {
+    margin-top: 72px;
+    padding: 42px 48px;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .takeaway b {
+    font-size: clamp(36px, 3.25vw, 52px);
+    font-weight: 250;
+    line-height: .98;
+  }
+  .takeaway p {
+    margin: 0;
+    font-size: clamp(22px, 2vw, 32px);
+    line-height: 1.36;
+    color: var(--grey-1);
+  }
+  .foot {
+    margin-top: 42px;
+    display: grid;
+    grid-template-columns: 1fr 1.45fr;
+    gap: 40px;
+    color: var(--grey-3);
+    font-size: 19px;
+    line-height: 1.42;
+  }
+  .sources {
+    max-height: 320px;
+    overflow: hidden;
+  }
+  @media (max-width: 1100px) {
+    .category-row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .category-label {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 0;
+    }
+    .category-label .label-title {
+      margin-top: 0;
+    }
+    .category-label .label-count {
+      margin-top: 0;
+      white-space: nowrap;
+    }
+    .category-events {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 820px) {
+    .eyebrow,
+    .section-title,
+    .category-label,
+    .takeaway,
+    .foot {
+      grid-template-columns: 1fr;
+      display: grid;
+      gap: 12px;
+    }
+    .eyebrow {
+      justify-items: start;
+    }
+    .category-events {
+      grid-template-columns: 1fr;
+    }
+    .item {
+      min-height: auto;
+    }
+    .item .summary {
+      min-height: 0;
+    }
+    .takeaway {
+      padding: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="poster">
+  <div class="eyebrow">
+    <span>AI 周报图 · 最近 7 天</span>
+    <span>北京时间 2026.06.13 - 2026.06.20</span>
+  </div>
+  <h1>AI 动态这一周：模型更便宜，智能体更像同事</h1>
+  <p class="lede">过去一周的主线不是单点发布，而是 AI 从“模型能力”继续下沉到企业工具、创作软件、部署平台、医疗研究和政策基础设施。</p>
+  <div class="hero-illustration">
+  <svg viewBox="0 0 1424 330" role="img" aria-label="AI 工作流插画" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 288H1398" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="42" y="86" width="126" height="126" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="66" y="110" width="52" height="52" fill="var(--accent)"/>
+    <path d="M66 184H144M66 204H130" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="236" y="92" width="116" height="116" rx="0" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="274" cy="130" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="274" cy="170" r="16" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M304 130H330M304 170H330" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="444" y="72" width="142" height="142" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="516" cy="124" r="18" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="482" cy="170" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="550" cy="170" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M516 124L482 170M516 124L550 170M482 170L550 170" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="690" y="46" width="352" height="210" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="728" y="82" width="120" height="92" fill="var(--accent)"/>
+    <circle cx="788" cy="128" r="44" stroke="white" stroke-width="3"/>
+    <path d="M744 202H830M744 222H884M744 238H848" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M894 88H980M894 112H940M894 136H980" stroke="var(--ink)" stroke-width="3"/>
+    <g fill="var(--ink)">
+      <circle cx="916" cy="178" r="5"/><circle cx="940" cy="178" r="5"/><circle cx="964" cy="178" r="5"/><circle cx="988" cy="178" r="5"/>
+      <circle cx="916" cy="202" r="5"/><circle cx="940" cy="202" r="5" fill="var(--accent)"/><circle cx="964" cy="202" r="5"/><circle cx="988" cy="202" r="5"/>
+    </g>
+    <path d="M1068 118H1160" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1144 102L1160 118L1144 134" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1210 84L1260 112V168L1210 196L1160 168V112L1210 84Z" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1210 112L1260 84M1210 112L1160 84M1210 112V196" stroke="var(--accent)" stroke-width="5"/>
+    <path d="M1120 228H1258" stroke="var(--ink)" stroke-width="3" stroke-dasharray="10 10"/>
+    <path d="M1290 150h72v92h-72z" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1310 178h34M1310 204h24" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="1358" cy="204" r="10" fill="var(--accent)"/>
+    <path d="M984 286L1014 236H1044L1074 286" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="1016" cy="220" r="14" fill="var(--ink)"/>
+    <path d="M1016 236V286M1044 236V286" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="562" y="260" width="38" height="28" fill="var(--accent)"/>
+    <rect x="1302" y="264" width="52" height="24" fill="var(--accent)"/>
+  </svg>
+</div>
+
+  <div class="section-title">
+    <h2>代表事件</h2>
+    <span>每个类型各取最新 2 条，保留原始来源</span>
+  </div>
+  <section class="timeline">
+    <div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 5h8l4 4v10H8V5Z"/><path d="M16 5v4h4"/><path d="M11 13h6"/><path d="M11 16h4"/></svg></span>
+              <div class="label-kicker">01</div>
+            </div>
+            <div class="label-title">模型发布</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">模型</span>
+                    <span class="item-no">01</span>
+                  </div>
+                  <h3>火山引擎上线豆包实时语音模型3.0 API 服务，开启邀测</h3>
+                  <p class="summary">这次更新重点是让语音助手更像真人对话：能边听边说，也更不容易被噪音打断。适合车机、智能硬件、客服这类需要实时响应的场景。</p>
+                  <p class="source">公众号：火山引擎</p>
+                  <p class="link"><a href="https://mp.weixin.qq.com/s/L4BJnexabQu5DAxDnwEGxw" rel="noopener noreferrer">mp.weixin.qq.com/s/L4BJnexabQu5DAxDnwEGxw</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">模型</span>
+                    <span class="item-no">02</span>
+                  </div>
+                  <h3>首个统一科学大模型 LOGOS 正式开源</h3>
+                  <p class="summary">LOGOS 想做的是“科学领域的通用语言”。它把蛋白质、小分子等对象转成模型能理解的 token，让一个模型尝试处理多个科学任务。</p>
+                  <p class="source">公众号：通义实验室（千问）</p>
+                  <p class="link"><a href="https://mp.weixin.qq.com/s/50q5uY849FKnBzk1Q04MRg" rel="noopener noreferrer">mp.weixin.qq.com/s/50q5uY849FKnBzk1Q04MRg</a></p>
+                </article>
+          </div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><rect x="5" y="6" width="14" height="12"/><path d="M8 10h8"/><path d="M8 14h5"/><path d="M9 20h6"/></svg></span>
+              <div class="label-kicker">02</div>
+            </div>
+            <div class="label-title">产品与工具</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">产品</span>
+                    <span class="item-no">03</span>
+                  </div>
+                  <h3>NVIDIA Research 发布 SpatialClaw：免训练空间推理框架</h3>
+                  <p class="summary">SpatialClaw 不重新训练模型，而是让模型写代码调用视觉工具。简单说，它给模型配了工具箱，帮助它更好判断物体位置和 3D 空间关系。</p>
+                  <p class="source">MarkTechPost（RSS）</p>
+                  <p class="link"><a href="https://www.marktechpost.com/2026/06/19/nvidia-ai-introduce-spatialclaw-a-training-free-agent-that-treats-code-as-the-action-interface-for-spatial-reasoning" rel="noopener noreferrer">www.marktechpost.com/2026/06/19/nvidia-ai-introduc...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">产品</span>
+                    <span class="item-no">04</span>
+                  </div>
+                  <h3>Cloudflare 为 AI 智能体推出临时账户</h3>
+                  <p class="summary">Cloudflare 让 AI 智能体可以临时开账号、直接部署 Worker。对开发者来说，这意味着 agent 不只会写代码，也能更顺地把东西跑起来。</p>
+                  <p class="source">Cloudflare Blog</p>
+                  <p class="link"><a href="https://blog.cloudflare.com/temporary-accounts" rel="noopener noreferrer">blog.cloudflare.com/temporary-accounts</a></p>
+                </article>
+          </div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 20h12"/><path d="M8 20V8l4-3 4 3v12"/><path d="M10 11h4"/><path d="M10 15h4"/></svg></span>
+              <div class="label-kicker">03</div>
+            </div>
+            <div class="label-title">行业与政策</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">行业</span>
+                    <span class="item-no">05</span>
+                  </div>
+                  <h3>微软双向转售GPT与DeepSeek成全球最大AI中间商</h3>
+                  <p class="summary">彭博社报道，微软已成为全球最大AI模型中转站，既将ChatGPT卖给中国企业，也反向将DeepSeek模型卖给西方客户。报道称微软正在测试DeepSeek-R1和DeepSeek-V4，计划向西方客户提供这些中国模型。这一模式构建起跨中…</p>
+                  <p class="source">X：阿易 AI Notes (@AYi_AInotes)</p>
+                  <p class="link"><a href="https://x.com/AYi_AInotes/status/2068218661710512231" rel="noopener noreferrer">x.com/AYi_AInotes/status/2068218661...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">行业</span>
+                    <span class="item-no">06</span>
+                  </div>
+                  <h3>Figure机器人数首超人类员工</h3>
+                  <p class="summary">Figure 说公司里的机器人数量已经超过人类员工。这不是单纯炫技，更像一个信号：人形机器人正在进入更密集的内部生产和测试阶段。</p>
+                  <p class="source">X：Rohan Paul (@rohanpaul_ai)</p>
+                  <p class="link"><a href="https://x.com/rohanpaul_ai/status/2068089038213693800" rel="noopener noreferrer">x.com/rohanpaul_ai/status/206808903...</a></p>
+                </article>
+          </div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M7 4h8l4 4v12H7V4Z"/><path d="M15 4v4h4"/><path d="M10 12h6"/><path d="M10 16h6"/></svg></span>
+              <div class="label-kicker">04</div>
+            </div>
+            <div class="label-title">论文研究</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">研究</span>
+                    <span class="item-no">07</span>
+                  </div>
+                  <h3>MosaicLeaks： 你的研究智能体能保守秘密吗？</h3>
+                  <p class="summary">这项研究提醒我们：研究型智能体一边读私有文件、一边查公网时，可能不小心把隐私带出去。论文也给出训练办法来降低泄露风险。</p>
+                  <p class="source">Hugging Face：Blog（RSS）</p>
+                  <p class="link"><a href="https://huggingface.co/blog/ServiceNow/mosaicleaks" rel="noopener noreferrer">huggingface.co/blog/ServiceNow/mosaicleaks</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">研究</span>
+                    <span class="item-no">08</span>
+                  </div>
+                  <h3>OpenAI 强化学习实现广泛且持久的有益模型</h3>
+                  <p class="summary">OpenAI 这项研究不是单测某个能力，而是训练模型更诚实、更谦逊、更愿意被纠正。重点在于这些改善能否迁移到很多不同任务里。</p>
+                  <p class="source">OpenAI：Alignment 研究博客（RSS）</p>
+                  <p class="link"><a href="https://alignment.openai.com/beneficial-rl" rel="noopener noreferrer">alignment.openai.com/beneficial-rl</a></p>
+                </article>
+          </div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 4v3"/><path d="M7 7l2 2"/><path d="M17 7l-2 2"/><path d="M9 14a3 3 0 1 1 6 0c0 1.5-1 2.2-1.7 3h-2.6C10 16.2 9 15.5 9 14Z"/><path d="M10.5 20h3"/></svg></span>
+              <div class="label-kicker">05</div>
+            </div>
+            <div class="label-title">技巧观点</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">观点</span>
+                    <span class="item-no">09</span>
+                  </div>
+                  <h3>开源教程《Deep Agents 实战》发布</h3>
+                  <p class="summary">LangChain 官方认证大使 @zhanghaili0610 推出开源教程《Deep Agents 实战》，基于 LangChain / LangGraph 生态，讲解如何用 Deep Agents Harness 框架构建真实 A…</p>
+                  <p class="source">X：邵猛 (@shao__meng)</p>
+                  <p class="link"><a href="https://x.com/shao__meng/status/2068306942184034471" rel="noopener noreferrer">x.com/shao__meng/status/20683069421...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">观点</span>
+                    <span class="item-no">10</span>
+                  </div>
+                  <h3>OpenRouter vs Portkey：你的团队该选哪个LLM网关？</h3>
+                  <p class="summary">这篇文章帮团队选 LLM 网关。OpenRouter 更像多模型入口和路由服务，Portkey 更偏企业治理、日志观测、权限和护栏管理。</p>
+                  <p class="source">OpenRouter：Announcements（RSS）</p>
+                  <p class="link"><a href="https://openrouter.ai/blog/insights/openrouter-vs-portkey" rel="noopener noreferrer">openrouter.ai/blog/insights/openrouter-vs-p...</a></p>
+                </article>
+          </div>
+        </div>
+  </section>
+
+  <section class="takeaway">
+    <b>一句话判断</b>
+    <p>AI 新闻正在从“谁发布了更强模型”转向“谁能把模型变成稳定、可控、可计费、能进入真实工作流的系统”。</p>
+  </section>
+
+  <footer class="foot">
+    <div>
+      数据来自公开资讯池，按最近 7 天精选条目整理；代表事件按五个类型各取最新 2 条。摘要为二次归纳，具体事实以原文来源为准。
+    </div>
+    <div class="sources">1. <a href="https://mp.weixin.qq.com/s/L4BJnexabQu5DAxDnwEGxw" rel="noopener noreferrer">公众号：火山引擎 · 火山引擎上线豆包实时语音模型3.0 API 服务，开启邀测</a><br>2. <a href="https://mp.weixin.qq.com/s/50q5uY849FKnBzk1Q04MRg" rel="noopener noreferrer">公众号：通义实验室（千问） · 首个统一科学大模型 LOGOS 正式开源</a><br>3. <a href="https://www.marktechpost.com/2026/06/19/nvidia-ai-introduce-spatialclaw-a-training-free-agent-that-treats-code-as-the-action-interface-for-spatial-reasoning" rel="noopener noreferrer">MarkTechPost（RSS） · NVIDIA Research 发布 SpatialClaw：免训练空间推理框架</a><br>4. <a href="https://blog.cloudflare.com/temporary-accounts" rel="noopener noreferrer">Cloudflare Blog · Cloudflare 为 AI 智能体推出临时账户</a><br>5. <a href="https://x.com/AYi_AInotes/status/2068218661710512231" rel="noopener noreferrer">X：阿易 AI Notes (@AYi_AInotes) · 微软双向转售GPT与DeepSeek成全球最大AI中间商</a><br>6. <a href="https://x.com/rohanpaul_ai/status/2068089038213693800" rel="noopener noreferrer">X：Rohan Paul (@rohanpaul_ai) · Figure机器人数首超人类员工</a><br>7. <a href="https://huggingface.co/blog/ServiceNow/mosaicleaks" rel="noopener noreferrer">Hugging Face：Blog（RSS） · MosaicLeaks： 你的研究智能体能保守秘密吗？</a><br>8. <a href="https://alignment.openai.com/beneficial-rl" rel="noopener noreferrer">OpenAI：Alignment 研究博客（RSS） · OpenAI 强化学习实现广泛且持久的有益模型</a><br>9. <a href="https://x.com/shao__meng/status/2068306942184034471" rel="noopener noreferrer">X：邵猛 (@shao__meng) · 开源教程《Deep Agents 实战》发布</a><br>10. <a href="https://openrouter.ai/blog/insights/openrouter-vs-portkey" rel="noopener noreferrer">OpenRouter：Announcements（RSS） · OpenRouter vs Portkey：你的团队该选哪个LLM网关？</a></div>
+  </footer>
+</main>
+<script>
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+    event.preventDefault();
+    window.location.href = href;
+  });
+</script>
+</body>
+</html>
