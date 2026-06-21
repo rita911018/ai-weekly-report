@@ -425,9 +425,7 @@
     width: min(920px, 100%);
     margin: 0 auto;
     padding: clamp(28px, 5.2vw, 76px) clamp(22px, 4.4vw, 54px) clamp(40px, 5vw, 72px);
-    background:
-      linear-gradient(90deg, rgba(0, 47, 167, .035) 1px, transparent 1px) 0 0 / 36px 36px,
-      var(--mag-paper);
+    background: var(--mag-paper);
     color: var(--mag-ink);
   }
   .mag-kicker,
@@ -605,9 +603,7 @@
     .magazine {
       width: 100%;
       padding: 22px 20px 44px;
-      background:
-        linear-gradient(90deg, rgba(0, 47, 167, .026) 1px, transparent 1px) 0 0 / 28px 28px,
-        var(--mag-paper);
+      background: var(--mag-paper);
     }
     .mag-kicker {
       display: grid;
@@ -689,9 +685,9 @@
     <h1 class="mag-title"><span>AI 正在从<em>模型竞赛</em></span><span>走向真实工作流</span></h1>
     <p class="mag-lede">这一周的重点不只是“谁又发布了更强模型”，而是 AI 正在进入更具体的工具、软件、办公场景和企业流程：能被调用、能被部署、也开始被普通人真正用到。</p>
     <nav class="mag-nav" aria-label="本期栏目">
-      <a href="#ai-models"><b>01</b><span>模型发布</span><small>最新 2 条</small></a><a href="#ai-products"><b>02</b><span>产品与工具</span><small>精选 4 条</small></a><a href="#industry"><b>03</b><span>行业与政策</span><small>最新 2 条</small></a><a href="#tip"><b>04</b><span>技巧观点</span><small>最新 2 条</small></a>
+      <a href="#ai-models"><b>01</b><span>模型发布</span><small>精选 4 条</small></a><a href="#ai-products"><b>02</b><span>产品与工具</span><small>精选 4 条</small></a><a href="#industry"><b>03</b><span>行业与政策</span><small>最新 2 条</small></a><a href="#tip"><b>04</b><span>技巧观点</span><small>最新 2 条</small></a>
     </nav>
-    <p class="issue-note">产品与工具精选 4 条，其余类型各取最新 2 条；摘要为二次归纳，具体事实以原文来源为准。</p>
+    <p class="issue-note">模型发布、产品与工具各精选 4 条，其余类型各取最新 2 条；摘要为二次归纳，具体事实以原文来源为准。</p>
   </header>
 
   <section class="ledger" aria-label="代表事件">
@@ -699,7 +695,7 @@
           <header class="ledger-head">
             <span class="group-no">01</span>
             <h2>模型发布</h2>
-            <p>最新 2 条</p>
+            <p>精选 4 条</p>
           </header>
           <div class="ledger-list">
             <article class="ledger-item" style="--accent:#002FA7">
@@ -718,6 +714,22 @@
                     <p class="ledger-summary">LOGOS 想做的是“科学领域的通用语言”。它把蛋白质、小分子等对象转成模型能理解的 token，让一个模型尝试处理多个科学任务。</p>
                     <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
                   </div>
+                </article><article class="ledger-item" style="--accent:#002FA7">
+                  <div class="event-no">03</div>
+                  <div>
+                    <a class="event-title" href="https://huggingface.co/blog/allenai/molmomotion" rel="noopener noreferrer">MolmoMotion：语言引导的3D运动预测模型</a>
+                    <div class="ledger-meta">模型 · Hugging Face：Blog（RSS）</div>
+                    <p class="ledger-summary">MolmoMotion基于Molmo 2骨干网络，输入视频帧、物体上的3D点标记及文字动作指令（如&quot;移动并旋转桌上放水果的木碗&quot;），预测未来数秒内这些点的3D轨迹。提供两个变体：自回归的MolmoMotion-AR逐步预测坐标，流匹配的…</p>
+                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
+                  </div>
+                </article><article class="ledger-item" style="--accent:#002FA7">
+                  <div class="event-no">04</div>
+                  <div>
+                    <a class="event-title" href="https://arxiv.org/abs/2606.19005" rel="noopener noreferrer">Sumi：从头训练的7B开源均匀扩散语言模型</a>
+                    <div class="ledger-meta">模型 · HuggingFace Daily Papers（社区热门论文）</div>
+                    <p class="ledger-summary">Sumi（日语&quot;墨&quot;）是一个完全开源的7B参数均匀扩散语言模型，从零开始在1.5T模型token上预训练。它在知识、推理和编程评测中与同等token预算的自回归模型表现相当，但在常识推理benchmark上略逊，教育密集型数据混合可能是…</p>
+                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
+                  </div>
                 </article>
           </div>
         </section><section class="ledger-group" id="ai-products">
@@ -728,7 +740,7 @@
           </header>
           <div class="ledger-list">
             <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">03</div>
+                  <div class="event-no">05</div>
                   <div>
                     <a class="event-title" href="https://the-decoder.com/adobe-adds-ai-agents-to-photoshop-premiere-and-more-creative-cloud-apps" rel="noopener noreferrer">Adobe 为 Photoshop、Premiere 等多款 Creative Cloud 应用加入 AI 智能体</a>
                     <div class="ledger-meta">产品 · The Decoder：AI News（RSS）</div>
@@ -736,7 +748,7 @@
                     <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
                   </div>
                 </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">04</div>
+                  <div class="event-no">06</div>
                   <div>
                     <a class="event-title" href="https://openai.com/index/improving-health-intelligence-in-chatgpt" rel="noopener noreferrer">GPT-5.5 Instant提升ChatGPT健康智能</a>
                     <div class="ledger-meta">产品 · OpenAI：官网动态（RSS · 排除企业/客户案例）</div>
@@ -744,7 +756,7 @@
                     <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
                   </div>
                 </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">05</div>
+                  <div class="event-no">07</div>
                   <div>
                     <a class="event-title" href="https://x.ai/news/introducing-word-addin" rel="noopener noreferrer">xAI 发布 Grok for Word 插件</a>
                     <div class="ledger-meta">产品 · xAI：News（网页）</div>
@@ -752,7 +764,7 @@
                     <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
                   </div>
                 </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">06</div>
+                  <div class="event-no">08</div>
                   <div>
                     <a class="event-title" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.181" rel="noopener noreferrer">Claude Code v2.1.181 发布</a>
                     <div class="ledger-meta">产品 · Claude Code：GitHub Releases（RSS）</div>
@@ -769,7 +781,7 @@
           </header>
           <div class="ledger-list">
             <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">07</div>
+                  <div class="event-no">09</div>
                   <div>
                     <a class="event-title" href="https://x.com/AYi_AInotes/status/2068218661710512231" rel="noopener noreferrer">微软双向转售GPT与DeepSeek成全球最大AI中间商</a>
                     <div class="ledger-meta">行业 · X：阿易 AI Notes (@AYi_AInotes)</div>
@@ -777,7 +789,7 @@
                     <div class="why">为什么值得看：它会影响企业采购、平台规则和 AI 真正落地的节奏。</div>
                   </div>
                 </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">08</div>
+                  <div class="event-no">10</div>
                   <div>
                     <a class="event-title" href="https://x.com/rohanpaul_ai/status/2068089038213693800" rel="noopener noreferrer">Figure机器人数首超人类员工</a>
                     <div class="ledger-meta">行业 · X：Rohan Paul (@rohanpaul_ai)</div>
@@ -794,7 +806,7 @@
           </header>
           <div class="ledger-list">
             <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">09</div>
+                  <div class="event-no">11</div>
                   <div>
                     <a class="event-title" href="https://x.com/shao__meng/status/2068306942184034471" rel="noopener noreferrer">开源教程《Deep Agents 实战》发布</a>
                     <div class="ledger-meta">观点 · X：邵猛 (@shao__meng)</div>
@@ -802,7 +814,7 @@
                     <div class="why">为什么值得看：它能帮助团队判断工具栈、工作流和实践方法怎么选。</div>
                   </div>
                 </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">10</div>
+                  <div class="event-no">12</div>
                   <div>
                     <a class="event-title" href="https://openrouter.ai/blog/insights/openrouter-vs-portkey" rel="noopener noreferrer">OpenRouter vs Portkey：你的团队该选哪个LLM网关？</a>
                     <div class="ledger-meta">观点 · OpenRouter：Announcements（RSS）</div>
@@ -814,9 +826,6 @@
         </section>
   </section>
 
-  <footer class="mag-foot">
-    <div>数据来自公开资讯池，按最近 7 天精选条目整理。已移除“论文研究”，增加“产品与工具”占比，让周报更接近日常可感知的 AI 动态。</div>
-  </footer>
 </main>
 <script>
   document.addEventListener("click", (event) => {
