@@ -17,7 +17,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: #faf8f3;
+    background: var(--paper);
     color: var(--ink);
     font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     overflow-x: hidden;
@@ -42,42 +42,21 @@
     text-transform: uppercase;
     color: var(--grey-3);
   }
-  .hero-title {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(250px, 25vw, 400px);
-    gap: clamp(24px, 4vw, 64px);
-    align-items: center;
-    margin: clamp(36px, 3.9vw, 62px) 0 clamp(20px, 2.2vw, 36px);
-  }
   h1 {
-    margin: 0 0 clamp(18px, 1.8vw, 28px);
+    margin: clamp(36px, 3.9vw, 62px) 0 clamp(18px, 1.8vw, 28px);
     max-width: 1320px;
-    font-size: clamp(52px, 6.2vw, 102px);
+    font-size: clamp(58px, 7.75vw, 124px);
     font-weight: 250;
-    line-height: .96;
+    line-height: .92;
     letter-spacing: 0;
   }
-  h1 span {
-    display: block;
-  }
   .lede {
-    margin: 0;
+    margin: 0 0 clamp(34px, 3.6vw, 58px);
     max-width: 1150px;
     font-size: clamp(22px, 2.125vw, 34px);
     font-weight: 400;
     line-height: 1.45;
     color: var(--grey-3);
-  }
-  .title-robot {
-    justify-self: end;
-    align-self: end;
-    width: 100%;
-    max-width: 400px;
-  }
-  .title-robot svg {
-    display: block;
-    width: 100%;
-    height: auto;
   }
   .hero-illustration {
     margin: 0 0 clamp(34px, 3.4vw, 54px);
@@ -276,6 +255,10 @@
     font-size: 19px;
     line-height: 1.42;
   }
+  .sources {
+    max-height: 320px;
+    overflow: hidden;
+  }
   @media (max-width: 1100px) {
     .category-row {
       grid-template-columns: 1fr;
@@ -300,10 +283,6 @@
     }
   }
   @media (max-width: 820px) {
-    .poster {
-      min-height: 0;
-      padding: 24px 22px 40px;
-    }
     .eyebrow,
     .section-title,
     .category-label,
@@ -315,100 +294,12 @@
     }
     .eyebrow {
       justify-items: start;
-      padding-bottom: 12px;
-      font-size: 14px;
-    }
-    .hero-title {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      margin: 26px 0 22px;
-    }
-    .title-copy {
-      display: block;
-    }
-    h1 {
-      max-width: none;
-      padding-right: 0;
-      font-size: clamp(34px, 9.2vw, 42px);
-      line-height: 1.08;
-      margin-bottom: 18px;
-      text-wrap: balance;
-    }
-    .lede {
-      max-width: none;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-    .title-robot {
-      position: static;
-      order: -1;
-      align-self: flex-end;
-      width: 72px;
-      max-width: 72px;
-      margin-bottom: 10px;
-    }
-    .hero-illustration {
-      margin-bottom: 34px;
-      padding: 14px 0 12px;
-      overflow: hidden;
-    }
-    .hero-illustration svg {
-      width: 100%;
-      max-width: none;
-      transform: none;
-    }
-    .section-title {
-      margin: 34px 0 20px;
-      padding-bottom: 14px;
-    }
-    .section-title h2 {
-      font-size: 38px;
-    }
-    .section-title span {
-      font-size: 15px;
-      line-height: 1.4;
-    }
-    .category-label {
-      grid-template-columns: auto auto minmax(0, 1fr) auto;
-      gap: 10px;
-      padding: 14px 0 12px;
-      align-items: center;
-    }
-    .category-label .label-head {
-      display: contents;
-    }
-    .category-label .label-icon {
-      grid-column: 1;
-      width: 34px;
-      height: 34px;
-    }
-    .category-label .label-kicker {
-      grid-column: 2;
-      padding: 6px 9px;
-      font-size: 13px;
-    }
-    .category-label .label-title {
-      grid-column: 3;
-      margin: 0;
-      font-size: 24px;
-      line-height: 1.18;
-      min-width: 0;
-    }
-    .category-label .label-count {
-      grid-column: 4;
-      justify-self: end;
-      margin: 0;
-      font-size: 14px;
-      white-space: nowrap;
     }
     .category-events {
       grid-template-columns: 1fr;
-      gap: 18px;
     }
     .item {
       min-height: auto;
-      padding: 22px;
     }
     .item .summary {
       min-height: 0;
@@ -417,415 +308,225 @@
       padding: 28px;
     }
   }
-  .magazine {
-    --mag-paper: #faf8f3;
-    --mag-ink: #171717;
-    --mag-muted: #6f6b63;
-    --mag-hair: #ded8ca;
-    width: min(920px, 100%);
-    margin: 0 auto;
-    padding: clamp(28px, 5.2vw, 76px) clamp(22px, 4.4vw, 54px) clamp(40px, 5vw, 72px);
-    background: var(--mag-paper);
-    color: var(--mag-ink);
-  }
-  .mag-kicker,
-  .mag-nav,
-  .ledger-meta,
-  .issue-note,
-  .mag-foot {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  }
-  .mag-kicker {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--mag-ink);
-    color: var(--mag-muted);
-    font-size: clamp(12px, 1.6vw, 15px);
-    font-weight: 700;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  .mag-hero {
-    padding: clamp(44px, 7vw, 88px) 0 clamp(36px, 5.4vw, 64px);
-    border-bottom: 1px solid var(--mag-hair);
-  }
-  .mag-title {
-    margin: 0;
-    max-width: 780px;
-    font-family: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", serif;
-    font-size: clamp(52px, 8vw, 86px);
-    font-weight: 600;
-    line-height: .98;
-    letter-spacing: 0;
-  }
-  .mag-title em {
-    color: var(--accent);
-    font-style: normal;
-  }
-  .mag-lede {
-    max-width: 720px;
-    margin: clamp(24px, 3.2vw, 36px) 0 0;
-    font-family: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", serif;
-    font-size: clamp(20px, 2.4vw, 25px);
-    line-height: 1.78;
-    color: #3f3c37;
-  }
-  .mag-nav {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    margin-top: clamp(36px, 5vw, 58px);
-    background: var(--mag-hair);
-    border: 1px solid var(--mag-hair);
-  }
-  .mag-nav a {
-    display: grid;
-    gap: 8px;
-    min-height: 92px;
-    padding: 14px;
-    background: var(--mag-paper);
-    color: var(--mag-ink);
-    border: 0;
-  }
-  .mag-nav b {
-    font-size: 13px;
-    color: var(--accent);
-  }
-  .mag-nav span {
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .issue-note {
-    margin-top: 18px;
-    color: var(--mag-muted);
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  .ledger {
-    display: grid;
-    gap: clamp(42px, 6vw, 72px);
-    padding-top: clamp(42px, 6vw, 72px);
-  }
-  .ledger-group {
-    display: grid;
-    grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
-    gap: clamp(24px, 4vw, 44px);
-    padding-top: 20px;
-    border-top: 4px solid var(--accent);
-  }
-  .ledger-head {
-    position: sticky;
-    top: 18px;
-    align-self: start;
-  }
-  .ledger-head .group-no {
-    display: inline-block;
-    margin-bottom: 22px;
-    padding: 7px 10px;
-    background: var(--accent);
-    color: var(--accent-on);
-    font: 800 13px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  }
-  .ledger-head h2 {
-    margin: 0;
-    font-size: clamp(27px, 3.3vw, 36px);
-    font-weight: 400;
-    line-height: 1.1;
-  }
-  .ledger-head p {
-    margin: 12px 0 0;
-    color: var(--mag-muted);
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .ledger-list {
-    display: grid;
-    gap: 0;
-  }
-  .ledger-item {
-    display: grid;
-    grid-template-columns: 56px minmax(0, 1fr);
-    gap: clamp(14px, 2.4vw, 24px);
-    padding: 0 0 clamp(26px, 4vw, 40px);
-    margin-bottom: clamp(26px, 4vw, 40px);
-    border-bottom: 1px solid var(--mag-hair);
-  }
-  .ledger-item:last-child {
-    margin-bottom: 0;
-  }
-  .event-no {
-    color: var(--accent);
-    font: 700 19px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  }
-  .event-title {
-    display: inline;
-    color: var(--mag-ink);
-    border-bottom: 2px solid rgba(0, 47, 167, .35);
-    font-family: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", serif;
-    font-size: clamp(23px, 3vw, 32px);
-    font-weight: 650;
-    line-height: 1.22;
-  }
-  .event-title:hover {
-    color: var(--accent-on);
-    background: var(--accent);
-  }
-  .ledger-meta {
-    margin-top: 12px;
-    color: var(--mag-muted);
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .ledger-summary {
-    margin: 16px 0 0;
-    max-width: 650px;
-    font-size: clamp(17px, 2.05vw, 20px);
-    line-height: 1.74;
-    color: #2b2a27;
-  }
-  .why {
-    margin-top: 14px;
-    color: var(--accent);
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .mag-foot {
-    margin-top: clamp(54px, 7vw, 84px);
-    padding-top: 24px;
-    border-top: 1px solid var(--mag-ink);
-    color: var(--mag-muted);
-    font-size: 13px;
-    line-height: 1.65;
-  }
-  @media (max-width: 820px) {
-    .magazine {
-      width: 100%;
-      padding: 22px 20px 44px;
-      background: var(--mag-paper);
-    }
-    .mag-kicker {
-      display: grid;
-      gap: 8px;
-      font-size: 12px;
-    }
-    .mag-hero {
-      padding: 42px 0 34px;
-    }
-    .mag-title {
-      font-size: clamp(36px, 11vw, 45px);
-      line-height: 1.04;
-    }
-    .mag-lede {
-      font-size: 17px;
-      line-height: 1.76;
-    }
-    .mag-nav {
-      grid-template-columns: 1fr 1fr;
-      margin-top: 30px;
-    }
-    .mag-nav a {
-      min-height: 74px;
-      padding: 12px;
-    }
-    .ledger {
-      gap: 46px;
-      padding-top: 44px;
-    }
-    .ledger-group {
-      grid-template-columns: 1fr;
-      gap: 22px;
-      border-top-width: 6px;
-    }
-    .ledger-head {
-      position: static;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-    .ledger-head .group-no {
-      margin: 0;
-    }
-    .ledger-head h2 {
-      font-size: 26px;
-    }
-    .ledger-head p {
-      margin: 0;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-    .ledger-item {
-      grid-template-columns: 42px minmax(0, 1fr);
-      padding-bottom: 28px;
-      margin-bottom: 28px;
-    }
-    .event-no {
-      font-size: 16px;
-    }
-    .event-title {
-      font-size: 23px;
-      line-height: 1.28;
-    }
-    .ledger-summary {
-      font-size: 16px;
-      line-height: 1.72;
-    }
-  }
 </style>
 </head>
 <body>
-<main class="magazine">
-  <header class="mag-hero">
-    <div class="mag-kicker">
-      <span>AI WEEKLY · 最近 7 天</span>
-      <span>北京时间 2026.06.29 - 2026.07.06</span>
-    </div>
-    <h1 class="mag-title"><span>AI 正在从<em>模型竞赛</em></span><span>走向真实工作流</span></h1>
-    <p class="mag-lede">这一周的重点不只是“谁又发布了更强模型”，而是 AI 正在进入更具体的工具、软件、办公场景和企业流程：能被调用、能被部署、也开始被普通人真正用到。</p>
-    <nav class="mag-nav" aria-label="本期栏目">
-      <a href="#ai-models"><b>01</b><span>模型发布</span><small>精选 4 条</small></a><a href="#ai-products"><b>02</b><span>产品与工具</span><small>精选 4 条</small></a><a href="#industry"><b>03</b><span>行业与政策</span><small>最新 2 条</small></a><a href="#tip"><b>04</b><span>技巧观点</span><small>最新 2 条</small></a>
-    </nav>
-    <p class="issue-note">模型发布、产品与工具各精选 4 条，其余类型各取最新 2 条；优先保留对普通员工和业务团队有直接影响的动态。</p>
-  </header>
+<main class="poster">
+  <div class="eyebrow">
+    <span>AI 周报图 · 最近 7 天</span>
+    <span>北京时间 2026.06.13 - 2026.06.20</span>
+  </div>
+  <h1>AI 动态这一周：模型更便宜，智能体更像同事</h1>
+  <p class="lede">过去一周的主线不是单点发布，而是 AI 从“模型能力”继续下沉到企业工具、创作软件、部署平台、医疗研究和政策基础设施。</p>
+  <div class="hero-illustration">
+  <svg viewBox="0 0 1424 330" role="img" aria-label="AI 工作流插画" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 288H1398" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="42" y="86" width="126" height="126" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="66" y="110" width="52" height="52" fill="var(--accent)"/>
+    <path d="M66 184H144M66 204H130" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="236" y="92" width="116" height="116" rx="0" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="274" cy="130" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="274" cy="170" r="16" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M304 130H330M304 170H330" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="444" y="72" width="142" height="142" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="516" cy="124" r="18" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="482" cy="170" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="550" cy="170" r="16" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M516 124L482 170M516 124L550 170M482 170L550 170" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="690" y="46" width="352" height="210" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="728" y="82" width="120" height="92" fill="var(--accent)"/>
+    <circle cx="788" cy="128" r="44" stroke="white" stroke-width="3"/>
+    <path d="M744 202H830M744 222H884M744 238H848" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M894 88H980M894 112H940M894 136H980" stroke="var(--ink)" stroke-width="3"/>
+    <g fill="var(--ink)">
+      <circle cx="916" cy="178" r="5"/><circle cx="940" cy="178" r="5"/><circle cx="964" cy="178" r="5"/><circle cx="988" cy="178" r="5"/>
+      <circle cx="916" cy="202" r="5"/><circle cx="940" cy="202" r="5" fill="var(--accent)"/><circle cx="964" cy="202" r="5"/><circle cx="988" cy="202" r="5"/>
+    </g>
+    <path d="M1068 118H1160" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1144 102L1160 118L1144 134" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1210 84L1260 112V168L1210 196L1160 168V112L1210 84Z" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1210 112L1260 84M1210 112L1160 84M1210 112V196" stroke="var(--accent)" stroke-width="5"/>
+    <path d="M1120 228H1258" stroke="var(--ink)" stroke-width="3" stroke-dasharray="10 10"/>
+    <path d="M1290 150h72v92h-72z" stroke="var(--ink)" stroke-width="3"/>
+    <path d="M1310 178h34M1310 204h24" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="1358" cy="204" r="10" fill="var(--accent)"/>
+    <path d="M984 286L1014 236H1044L1074 286" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="1016" cy="220" r="14" fill="var(--ink)"/>
+    <path d="M1016 236V286M1044 236V286" stroke="var(--ink)" stroke-width="3"/>
+    <rect x="562" y="260" width="38" height="28" fill="var(--accent)"/>
+    <rect x="1302" y="264" width="52" height="24" fill="var(--accent)"/>
+  </svg>
+</div>
 
-  <section class="ledger" aria-label="代表事件">
-    <section class="ledger-group" id="ai-models">
-          <header class="ledger-head">
-            <span class="group-no">01</span>
-            <h2>模型发布</h2>
-            <p>精选 4 条</p>
-          </header>
-          <div class="ledger-list">
-            <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">01</div>
-                  <div>
-                    <a class="event-title" href="https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash" rel="noopener noreferrer">Google DeepMind 发布 Nano Banana 2 Lite 和 Gemini Omni Flash</a>
-                    <div class="ledger-meta">模型 · Google DeepMind：Blog（RSS）</div>
-                    <p class="ledger-summary">Google DeepMind 推出 Nano Banana 2 Lite（gemini-3.1-flash-lite-image），为 Nano Banana 系列速度最快、成本最低的图像模型，文本到图像输出仅需 4 秒，每 1K 分辨率图像成本 $0.034，已上线 Google AI Studio、Gemini API 及消费者产品（AI Mode in Search、Gemini app 等）。</p>
-                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
+  <div class="section-title">
+    <h2>代表事件</h2>
+    <span>每个类型各取最新 2 条，保留原始来源</span>
+  </div>
+  <section class="timeline">
+    <div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 5h8l4 4v10H8V5Z"/><path d="M16 5v4h4"/><path d="M11 13h6"/><path d="M11 16h4"/></svg></span>
+              <div class="label-kicker">01</div>
+            </div>
+            <div class="label-title">模型发布</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">模型</span>
+                    <span class="item-no">01</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">02</div>
-                  <div>
-                    <a class="event-title" href="https://www.anthropic.com/news/claude-sonnet-5" rel="noopener noreferrer">Claude Sonnet 5 发布</a>
-                    <div class="ledger-meta">模型 · Anthropic：Newsroom（网页）</div>
-                    <p class="ledger-summary">Claude Sonnet 5 是 Anthropic 推出的最新 Sonnet 模型，具备计划、浏览器和终端工具使用能力，可自主运行。性能接近 Opus 4.8，定价更低：即日起至 2026 年 8 月 31 日，输入 token $2/百万，输出 $10/百万，之后恢复为 $3/百万输入和 $15/百万输出。相比 Sonnet 4.6，在推理、工具使用、编程和知识工作等智能体能力上大幅提升。</p>
-                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
+                  <h3>腾讯混元发布Hy3模型：295B参数MoE架构，Agent向LLM定位，已集成微信服务10亿+用户</h3>
+                  <p class="summary">腾讯混元团队发布Hy3模型，采用295B总参数、21B激活参数的MoE架构，推理效率可打平参数规模2-5倍的旗舰模型。Hy3定位为Agent向LLM，从preview到正式版基于50多个真实业务反馈迭代，内部WorkBuddy任务成功率…</p>
+                  <p class="source">X：阿易 AI Notes (@AYi_AInotes)</p>
+                  <p class="link"><a href="https://x.com/AYi_AInotes/status/2076341952023310580" rel="noopener noreferrer">x.com/AYi_AInotes/status/2076341952...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">模型</span>
+                    <span class="item-no">02</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">03</div>
-                  <div>
-                    <a class="event-title" href="https://www.marktechpost.com/2026/07/01/nvidia-releases-nemotron-labs-twotower" rel="noopener noreferrer">NVIDIA 发布 Nemotron-Labs-TwoTower 开放权重扩散语言模型</a>
-                    <div class="ledger-meta">模型 · MarkTechPost（RSS）</div>
-                    <p class="ledger-summary">NVIDIA 发布 Nemotron-Labs-TwoTower，基于冻结的自回归骨干 Nemotron-3-Nano-30B-A3B 的扩散语言模型。采用双塔架构：上下文塔冻结，降噪器塔训练，通过层对齐交叉注意力和状态播种协作。在 2×H100 上 BF16 评估，保留 98.7% 的 AR 基线质量，生成吞吐量提升 2.42 倍（γ=0.8，块大小 S=16）。降噪器在约 2.1T token 上训练，骨干使用 25T token 预训练。</p>
-                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
-                  </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">04</div>
-                  <div>
-                    <a class="event-title" href="https://mp.weixin.qq.com/s/RuukpnoOA2tI0ERCNrLgtQ" rel="noopener noreferrer">生数科技发布 Vidu S1，推动视频生成迈向&quot;实时交互&quot;新时代</a>
-                    <div class="ledger-meta">模型 · 公众号：生数科技（Vidu·视频）</div>
-                    <p class="ledger-summary">7月3日，生数科技在2026全球数字经济大会上发布Vidu S1实时交互模型，支持实时视频通话和语音控制视频走向，实现无限时长连续互动。模型采用自回归扩散路线，基于已生成画面和语音指令持续预测后续内容；无需传统建模，一张图片即可创建角色并自定义音色。Vidu S1在540P分辨率下实现25FPS（最高42FPS）实时生成，通过TurboDiffusion等技术降低计算成本，已开启内测。</p>
-                    <div class="why">为什么值得看：模型正在变成更便宜、更容易接入的基础能力。</div>
-                  </div>
+                  <h3>OpenAI 发布 GPT-5.6 系列医疗评估结果</h3>
+                  <p class="summary">OpenAI 发布 GPT-5.6 系列在医疗领域的评估结果。最小变体 GPT-5.6 Luna 在最低推理强度下即超越最高推理强度的 GPT-5.5，且成本低 25 倍；最大变体 GPT-5.6 Sol 树立新标杆。在涵盖患者端与临床…</p>
+                  <p class="source">X：Sam Altman (@sama)</p>
+                  <p class="link"><a href="https://x.com/sama/status/2075985056846451123" rel="noopener noreferrer">x.com/sama/status/20759850568464511...</a></p>
                 </article>
           </div>
-        </section><section class="ledger-group" id="ai-products">
-          <header class="ledger-head">
-            <span class="group-no">02</span>
-            <h2>产品与工具</h2>
-            <p>精选 4 条</p>
-          </header>
-          <div class="ledger-list">
-            <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">05</div>
-                  <div>
-                    <a class="event-title" href="https://github.blog/changelog/2026-07-01-kimi-k2-7-is-now-available-in-github-copilot" rel="noopener noreferrer">Kimi K2.7 Code 已在 GitHub Copilot 上正式发布</a>
-                    <div class="ledger-meta">产品 · Hacker News 热门（buzzing.cc 中文翻译）</div>
-                    <p class="ledger-summary">Kimi K2.7 Code 开源权重模型已在 GitHub Copilot 中正式可用，成为 Copilot 模型选择器首个可选的开源权重模型，为编程工作流提供更低成本选择。该模型由 GitHub 托管于 Microsoft Azure，按供应商列表价格以用量计费。 对普通员工来说，这类变化最容易被感知：它可能直接出现在每天打开的办公软件、创作工具、App 或企业协作系统里。</p>
-                    <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><rect x="5" y="6" width="14" height="12"/><path d="M8 10h8"/><path d="M8 14h5"/><path d="M9 20h6"/></svg></span>
+              <div class="label-kicker">02</div>
+            </div>
+            <div class="label-title">产品与工具</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">产品</span>
+                    <span class="item-no">03</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">06</div>
-                  <div>
-                    <a class="event-title" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.198" rel="noopener noreferrer">Claude Code v2.1.198 发布</a>
-                    <div class="ledger-meta">产品 · Claude Code：GitHub Releases（RSS）</div>
-                    <p class="ledger-summary">Claude Code v2.1.198 更新。Claude in Chrome 现已全面可用。为 claude agents 新增后台智能体通知（agent_needs_input / agent_completed）。新增 /dataviz 技能，提供图表与仪表盘设计指导及配色验证器。Gateway 增加 AWS 上的 Claude Platform 作为上游提供商。后台智能体在 worktree 中完成代码后自动提交、推送并创建草稿 PR。</p>
-                    <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
+                  <h3>Codex与ChatGPT Work多项更新：取消5小时限制</h3>
+                  <p class="summary">早上好。过去48小时里，Codex和ChatGPT Work非常忙碌！三项重要更新： - 暂时取消所有Plus、Business和Pro计划的5小时使用限制 - 正在推出变更，使GPT 5.6 Sol整体更高效，这将体现在使用量减少上…</p>
+                  <p class="source">X：Tibo (@thsottiaux)</p>
+                  <p class="link"><a href="https://x.com/thsottiaux/status/2076365965915467978" rel="noopener noreferrer">x.com/thsottiaux/status/20763659659...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">产品</span>
+                    <span class="item-no">04</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">07</div>
-                  <div>
-                    <a class="event-title" href="https://claude.com/blog/giving-admins-more-visibility-and-control-over-claude-usage-and-spend" rel="noopener noreferrer">Claude Enterprise 新增用量与成本分析及支出管控功能</a>
-                    <div class="ledger-meta">产品 · Claude：Blog（网页）</div>
-                    <p class="ledger-summary">Claude Enterprise 推出更丰富的管理分析工具和成本控制功能。仪表板现可按群组和用户分析用量与成本，支持按 SCIM 群组筛选，展示制品创建、文件编辑、技能和连接器对应的成本。Claude Code 管理控制台新增&quot;使用量&quot;和&quot;价值&quot;选项卡，分别显示活跃开发者、会话次数、常用命令，以及生产力提升估算、每次提交成本和年度价值估算。分析聊天支持自然语言查询并返回可导出图表。</p>
-                    <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
-                  </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">08</div>
-                  <div>
-                    <a class="event-title" href="https://developers.googleblog.com/announcing-adk-go-20" rel="noopener noreferrer">ADK Go 2.0 发布：构建可靠的多智能体应用，新增基于图的工作流引擎、人工参与循环与动态编排</a>
-                    <div class="ledger-meta">产品 · Google Developers Blog（RSS）</div>
-                    <p class="ledger-summary">Agent Development Kit （ADK） for Go 2.0 发布，引入了一类基于图的工作流引擎，用于组合复杂多智能体应用。新版本内置人工参与循环（HITL）编排、使用纯 Go 代码的动态执行、以及指数退避重试等自动弹性特性。统一执行模型后，单智能体应用与复杂图均运行在同一运行时上，简化了遥测与状态持久化。 对普通员工来说，这类变化最容易被感知：它可能直接出现在每天打开的办公软件、创作工具、App 或企业协作系统里。</p>
-                    <div class="why">为什么值得看：它更接近大家日常会打开、会部署、会协作的工具。</div>
-                  </div>
+                  <h3>Mindwalk：在代码库 3D 地图上回放编码代理会话</h3>
+                  <p class="summary">Mindwalk 是一款可视化工具，可将 Claude Code 和 Codex 的会话日志在代码库的 3D 地图上回放。它将仓库绘制成夜间地图，代理搜索、读取和编辑过的文件会发光，未触及区域保持黑暗，让用户一眼看清代理对任务的理解范围…</p>
+                  <p class="source">Hacker News 热门（buzzing.cc 中文翻译）</p>
+                  <p class="link"><a href="https://github.com/cosmtrek/mindwalk" rel="noopener noreferrer">github.com/cosmtrek/mindwalk</a></p>
                 </article>
           </div>
-        </section><section class="ledger-group" id="industry">
-          <header class="ledger-head">
-            <span class="group-no">03</span>
-            <h2>行业与政策</h2>
-            <p>最新 2 条</p>
-          </header>
-          <div class="ledger-list">
-            <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">09</div>
-                  <div>
-                    <a class="event-title" href="https://www.ithome.com/0/971/937.htm" rel="noopener noreferrer">花旗、Adobe等企业限制员工使用AI旗舰模型以控制成本</a>
-                    <div class="ledger-meta">行业 · IT之家（RSS）</div>
-                    <p class="ledger-summary">据404 Media获取的内部资料，Atlassian、Adobe、亚马逊等六家企业正限制员工使用AI工具，要求改用能力较低的大模型避免成本失控。至少一家企业月度AI开销增至三倍，超1500万美元。花旗银行因GitHub改为按量计费，于6月24日禁用Claude Opus 4.6、4.7及GPT-5.5等旗舰模型。Adobe于6月30日终止Claude无限制使用协议。Atlassian数据显示其AI月支出从500万美元飙升至1500万美元，本财年预计超1.2亿美元。</p>
-                    <div class="why">为什么值得看：它会影响企业采购、平台规则和 AI 真正落地的节奏。</div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 20h12"/><path d="M8 20V8l4-3 4 3v12"/><path d="M10 11h4"/><path d="M10 15h4"/></svg></span>
+              <div class="label-kicker">03</div>
+            </div>
+            <div class="label-title">行业与政策</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">行业</span>
+                    <span class="item-no">05</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">10</div>
-                  <div>
-                    <a class="event-title" href="https://mp.weixin.qq.com/s/yLb4T2UC16ebKHApdBbgWw" rel="noopener noreferrer">Anthropic在Claude Code中植入隐写术代码识别中国用户</a>
-                    <div class="ledger-meta">行业 · 公众号：数字生命卡兹克</div>
-                    <p class="ledger-summary">Anthropic在Claude Code中植入隐写术：读取本地时区（Asia/Shanghai或Asia/Urumqi）和ANTHROPIC_BASE_URL环境变量，与一份经base64+XOR（密钥91）加密的147个域名列表（含美团、字节跳动、月之暗面等）比对，识别中国用户。识别后，在请求发送前将系统提示词中日期字符串的单引号（U+0027）替换为其他Unicode字符，连字符改为斜杠，作为2-3比特分类标记传回服务器。</p>
-                    <div class="why">为什么值得看：它会影响企业采购、平台规则和 AI 真正落地的节奏。</div>
+                  <h3>xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥</h3>
+                  <p class="summary">安全研究者发现，xAI 官方 Grok CLI（npm 包 `@xai-official/grok` 0.2.93 版）会在每轮任务前后，将当前工作目录打包为 `before_codebase.tar.gz` 和 `after_code…</p>
+                  <p class="source">公众号：数字生命卡兹克</p>
+                  <p class="link"><a href="https://mp.weixin.qq.com/s/6c6vGMJAVMbh6UhNVw4dcg" rel="noopener noreferrer">mp.weixin.qq.com/s/6c6vGMJAVMbh6UhNVw4dcg</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">行业</span>
+                    <span class="item-no">06</span>
                   </div>
+                  <h3>苹果起诉OpenAI挖角窃密，分析师称即使指控未证实也可能重创其硬件计划</h3>
+                  <p class="summary">苹果在美国起诉OpenAI，指控其挖角400名员工、窃取工程机和机密文件。分析师Paolo Pescatore认为，即使指控最终无法证实，OpenAI的硬件计划仍可能受拖累，双方本就脆弱的合作关系将进一步削弱。斯坦福大学教授Mark L…</p>
+                  <p class="source">IT之家（RSS）</p>
+                  <p class="link"><a href="https://www.ithome.com/0/975/666.htm" rel="noopener noreferrer">www.ithome.com/0/975/666.htm</a></p>
                 </article>
           </div>
-        </section><section class="ledger-group" id="tip">
-          <header class="ledger-head">
-            <span class="group-no">04</span>
-            <h2>技巧观点</h2>
-            <p>最新 2 条</p>
-          </header>
-          <div class="ledger-list">
-            <article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">11</div>
-                  <div>
-                    <a class="event-title" href="https://openai.com/index/how-chatgpt-adoption-has-expanded" rel="noopener noreferrer">OpenAI Signals 数据揭示 ChatGPT 全球采用趋势</a>
-                    <div class="ledger-meta">观点 · OpenAI：官网动态（RSS · 排除企业/客户案例）</div>
-                    <p class="ledger-summary">OpenAI Signals 数据显示，用户注册六个月后日均消息量增加50%，尝试任务种类翻倍。自2023年7月以来，各大洲活跃用户均大幅增长，非洲和亚洲增速最快，低人类发展指数国家增长尤为显著。用户群体更加多元化，女性名字用户已占全球多数，巴西、哥伦比亚、波兰和纳米比亚等国女性用户显著多于男性。非英语用户占活跃用户半数以上，领先语言为西班牙语、葡萄牙语和阿拉伯语；乌兹别克语、哈萨克语和缅甸语用户占比增长百分比最大。</p>
-                    <div class="why">为什么值得看：它能帮助团队判断工具栈、工作流和实践方法怎么选。</div>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M7 4h8l4 4v12H7V4Z"/><path d="M15 4v4h4"/><path d="M10 12h6"/><path d="M10 16h6"/></svg></span>
+              <div class="label-kicker">04</div>
+            </div>
+            <div class="label-title">论文研究</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">研究</span>
+                    <span class="item-no">07</span>
                   </div>
-                </article><article class="ledger-item" style="--accent:#002FA7">
-                  <div class="event-no">12</div>
-                  <div>
-                    <a class="event-title" href="https://github.com/Trystan-SA/claude-design-system-prompt" rel="noopener noreferrer">Anthropic Claude Design 反向工程提示词开源更新</a>
-                    <div class="ledger-meta">观点 · Hacker News 热门（buzzing.cc 中文翻译）</div>
-                    <p class="ledger-summary">Anthropic 旗下 Claude Design 的反向工程系统提示词在 GitHub 以 MIT 许可证开源，包含 20 章提示词和 14 项技能，覆盖内容纪律、美学、无障碍（WCAG、语义 HTML、键盘导航）、交互状态、系统思维等。近日针对 Fable 5/Opus 4.7+ 系列校准，新增自主决策条款：小决定直接执行记录而不询问。项目支持 Claude Code/Claude.ai 及 Codex 两种变体。</p>
-                    <div class="why">为什么值得看：它能帮助团队判断工具栈、工作流和实践方法怎么选。</div>
+                  <h3>OpenAI GPT-5.6 Sol Ultra 一小时证明 50 年图论猜想</h3>
+                  <p class="summary">OpenAI 宣布其 GPT-5.6 Sol Ultra 模型在不到一小时内生成了图论难题&quot;循环双覆盖猜想&quot;的完整证明。该猜想由数学家 George Szekeres 和 Paul Seymour 于 1970 年代提出，悬而未决超过…</p>
+                  <p class="source">IT之家（RSS）</p>
+                  <p class="link"><a href="https://www.ithome.com/0/975/646.htm" rel="noopener noreferrer">www.ithome.com/0/975/646.htm</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">研究</span>
+                    <span class="item-no">08</span>
                   </div>
+                  <h3>博科圣地如何利用前沿AI技术</h3>
+                  <p class="summary">2025至2026年间对尼日利亚东北部27名前&quot;博科圣地&quot;成员的半结构化访谈揭示了该组织在2024年系统性地利用前沿AI技术。两大派系均使用ChatGPT、Claude、Gemini、Grok、Meta AI和DeepSeek辅助作战与…</p>
+                  <p class="source">Hacker News 热门（buzzing.cc 中文翻译）</p>
+                  <p class="link"><a href="https://casp.ac/reports/ai-enabled-terrorism" rel="noopener noreferrer">casp.ac/reports/ai-enabled-terrorism</a></p>
                 </article>
           </div>
-        </section>
+        </div><div class="category-row">
+          <aside class="category-label">
+            <div class="label-head">
+              <span class="label-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 4v3"/><path d="M7 7l2 2"/><path d="M17 7l-2 2"/><path d="M9 14a3 3 0 1 1 6 0c0 1.5-1 2.2-1.7 3h-2.6C10 16.2 9 15.5 9 14Z"/><path d="M10.5 20h3"/></svg></span>
+              <div class="label-kicker">05</div>
+            </div>
+            <div class="label-title">技巧观点</div>
+            <div class="label-count">最新 2 条</div>
+          </aside>
+          <div class="category-events">
+            <article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">观点</span>
+                    <span class="item-no">09</span>
+                  </div>
+                  <h3>Ploy 将 AI 智能体默认模型从 Claude Opus 4.8 切换至 GPT-5.6 Sol</h3>
+                  <p class="summary">Ploy 将其 AI 智能体默认模型从 Claude Opus 4.8 切换至 OpenAI 今晨发布的 GPT-5.6 Sol。在真实营销网站构建测试中，GPT-5.6 Sol 完成页面平均耗时 3 分 42 秒，较 Opus 4.8…</p>
+                  <p class="source">Hacker News 热门（buzzing.cc 中文翻译）</p>
+                  <p class="link"><a href="https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6" rel="noopener noreferrer">ploy.ai/blog/migrating-a-production-a...</a></p>
+                </article><article class="item" style="--accent:#002FA7">
+                  <div class="card-top">
+                    <span class="tag">观点</span>
+                    <span class="item-no">10</span>
+                  </div>
+                  <h3>纳德拉提出&quot;反向信息悖论&quot;：企业使用AI时需保护自身知识</h3>
+                  <p class="summary">微软CEO萨提亚·纳德拉提出&quot;反向信息悖论&quot;：AI时代，买家为使用AI支付金钱，同时必须暴露专有知识（提示词、工具使用、纠正反馈等），这些&quot;智力废气&quot;被模型学习，导致信息不对称向卖家倾斜。企业需要真正的信任边界，确保自身数据、痕迹、评估…</p>
+                  <p class="source">X：Satya Nadella (@satyanadella)</p>
+                  <p class="link"><a href="https://x.com/satyanadella/status/2076323181154230284" rel="noopener noreferrer">x.com/satyanadella/status/207632318...</a></p>
+                </article>
+          </div>
+        </div>
   </section>
 
+  <section class="takeaway">
+    <b>一句话判断</b>
+    <p>AI 新闻正在从“谁发布了更强模型”转向“谁能把模型变成稳定、可控、可计费、能进入真实工作流的系统”。</p>
+  </section>
+
+  <footer class="foot">
+    <div>
+      数据来自公开资讯池，按最近 7 天精选条目整理；代表事件按五个类型各取最新 2 条。摘要为二次归纳，具体事实以原文来源为准。
+    </div>
+    <div class="sources">1. <a href="https://x.com/AYi_AInotes/status/2076341952023310580" rel="noopener noreferrer">X：阿易 AI Notes (@AYi_AInotes) · 腾讯混元发布Hy3模型：295B参数MoE架构，Agent向LLM定位，已集成微信服务10亿+用户</a><br>2. <a href="https://x.com/sama/status/2075985056846451123" rel="noopener noreferrer">X：Sam Altman (@sama) · OpenAI 发布 GPT-5.6 系列医疗评估结果</a><br>3. <a href="https://x.com/thsottiaux/status/2076365965915467978" rel="noopener noreferrer">X：Tibo (@thsottiaux) · Codex与ChatGPT Work多项更新：取消5小时限制</a><br>4. <a href="https://github.com/cosmtrek/mindwalk" rel="noopener noreferrer">Hacker News 热门（buzzing.cc 中文翻译） · Mindwalk：在代码库 3D 地图上回放编码代理会话</a><br>5. <a href="https://mp.weixin.qq.com/s/6c6vGMJAVMbh6UhNVw4dcg" rel="noopener noreferrer">公众号：数字生命卡兹克 · xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥</a><br>6. <a href="https://www.ithome.com/0/975/666.htm" rel="noopener noreferrer">IT之家（RSS） · 苹果起诉OpenAI挖角窃密，分析师称即使指控未证实也可能重创其硬件计划</a><br>7. <a href="https://www.ithome.com/0/975/646.htm" rel="noopener noreferrer">IT之家（RSS） · OpenAI GPT-5.6 Sol Ultra 一小时证明 50 年图论猜想</a><br>8. <a href="https://casp.ac/reports/ai-enabled-terrorism" rel="noopener noreferrer">Hacker News 热门（buzzing.cc 中文翻译） · 博科圣地如何利用前沿AI技术</a><br>9. <a href="https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6" rel="noopener noreferrer">Hacker News 热门（buzzing.cc 中文翻译） · Ploy 将 AI 智能体默认模型从 Claude Opus 4.8 切换至 GPT-5.6 Sol</a><br>10. <a href="https://x.com/satyanadella/status/2076323181154230284" rel="noopener noreferrer">X：Satya Nadella (@satyanadella) · 纳德拉提出&quot;反向信息悖论&quot;：企业使用AI时需保护自身知识</a></div>
+  </footer>
 </main>
 <script>
   document.addEventListener("click", (event) => {
